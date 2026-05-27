@@ -8,9 +8,9 @@
 
 // Crie uma coleção chamada "heroes" e insira os seguintes documentos:
 db.heroes.insertMany([
-    { _id: 1, name: "Spider-Man", city: "New York", power: ["Agility", "Web-Shooting"], defeatVillains: 50},
-    { _id: 2, name: "Batman", city: "Gotham", power: ["Martial Arts", "Detective Skills"], defeatVillains: 200},
-    { _id: 3, name: "Wonder Woman", city: "Themyscira", power: ["Super Strength", "Lasso"], defeatVillains: 120}
+    { _id: 1, name: "Spider-Man", city: "New York", power: ["Agility", "Web-Shooting"], defeatedVillains: 50},
+    { _id: 2, name: "Batman", city: "Gotham", power: ["Martial Arts", "Detective Skills"], defeatedVillains: 200},
+    { _id: 3, name: "Wonder Woman", city: "Themyscira", power: ["Super Strength", "Lasso"], defeatedVillains: 120}
 ])
 
 // a) O Homem-Aranha desenvolveu um novo poder: Sentido Aranha Aprimorado. Adicione esse poder ao array power de "Spider-Man".
@@ -26,7 +26,7 @@ db.heroes.updateOne(
     // Condição: seleciona o documento do Batman
     { name: "Batman" },
     // Atualização: incrementa o número de vilões derrotados em 10
-    { $inc: { defeatVillains: 10 } }
+    { $inc: { defeatedVillains: 10 } }
 )
 
 // c) O nome da cidade da Mulher-Maravilha foi alterado para "Amazonia". Atualize essa informação.
@@ -59,7 +59,7 @@ db.menu.insertMany([
 
 // a) O restaurante decidiu aumentar o preço de todos os pratos em 10%. Atualize os preços.
 db.menu.updateMany(
-    // Condição: seleciona todos os documentos
+    // Condição: Seleciona todos os documentos
     {},
     // Atualização: incrementa o preço em 10%
     { $mul: { price: 1.10 } }
@@ -67,7 +67,7 @@ db.menu.updateMany(
 
 // b) O Taco agora vem com "Guacamole". Adicione esse ingrediente à lista ingredients.
 db.menu.updateOne(
-    // Condição: seleciona o documento do Taco
+    // Condição: Seleciona o documento do Taco
     { dish: "Tacos" },
     // Atualização: adiciona "Guacamole" ao array 'ingredients'
     { $push: { ingredients: "Guacamole" } }
@@ -75,7 +75,7 @@ db.menu.updateOne(
 
 // c) O Sushi teve um reajuste e agora custa 35. Atualize esse valor.
 db.menu.updateOne(
-    // Condição: seleciona o documento do Sushi
+    // Condição: Seleciona o documento do Sushi
     { dish: "Sushi" },
     // Atualização: define o preço para 35
     { $set: { price: 35 } }
@@ -83,8 +83,8 @@ db.menu.updateOne(
 
 // d) O restaurante removeu "Beef" dos Tacos e substituiu por "Chicken". Atualize a lista de ingredientes do Taco.
 db.menu.updateOne(
-    // Condição: seleciona o documento do Taco
-    { dish: "Tacos" },
-    // Atualização: remove "Beef" e adiciona "Chicken" ao array 'ingredients'
-    { $pull: { ingredients: "Beef" }, $push: { ingredients: "Chicken" } }
+    // Condição: Procura o Taco que contenha "Beef" no array de ingredientes
+    { dish: "Tacos", ingredients: "Beef" },
+    // Atualização: Remove o "Beef" e adiciona o "Chicken" ao array 'ingredients
+    { $set: { "ingredients.$": "Chicken" } }
 )
