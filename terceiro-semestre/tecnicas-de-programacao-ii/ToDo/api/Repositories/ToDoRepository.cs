@@ -2,6 +2,7 @@
 using api.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace api.Repositories
 {

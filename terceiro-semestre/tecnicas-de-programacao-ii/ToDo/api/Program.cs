@@ -1,7 +1,12 @@
 using api.Repositories;
 using api.Settings;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// CONFIGURAÇÃO GLOBAL DE DATA: Força o MongoDB a ler e gravar tudo como UTC de forma segura
+BsonSerializer.RegisterSerializer(typeof(DateTime), new DateTimeSerializer(DateTimeKind.Utc));
 
 // Configra o mapeamento de configurações do MongoDB
 builder.Services.Configure<MongoDbSettings>(

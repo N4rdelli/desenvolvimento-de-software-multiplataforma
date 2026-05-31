@@ -40,6 +40,12 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(ToDoItem newItem)
         {
+            // Se o prazo foi enviado, forçamos o .NET a entender aquela propriedade como UTC
+            if (newItem.DueDate.HasValue)
+            {
+                newItem.DueDate = DateTime.SpecifyKind(newItem.DueDate.Value, DateTimeKind.Utc);
+            }
+
             await _repository.CreateAsync(newItem);
             return CreatedAtAction(nameof(Get), new { id = newItem.Id }, newItem);
         }
@@ -80,6 +86,18 @@ namespace api.Controllers
 
             existingItem.IsCancelled = isCancelled;
             await _repository.UpdateCancelledStatusAsync(id, isCancelled);
+            return NoContent();
+        }
+
+        // DELETE /api/todo/{id}
+        // Método para excluir definitivamente uma tarefa do banco de dados
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var existingItem = await _repository.GetByIdAsync(id);
+            if (existingItem is null) return NotFound();
+
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
     }

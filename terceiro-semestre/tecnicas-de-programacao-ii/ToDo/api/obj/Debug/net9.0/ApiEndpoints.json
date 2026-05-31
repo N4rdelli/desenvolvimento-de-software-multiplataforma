@@ -84,6 +84,22 @@
   },
   {
     "ContainingType": "api.Controllers.ToDoController",
+    "Method": "Delete",
+    "RelativePath": "api/ToDo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "api.Controllers.ToDoController",
     "Method": "PatchCancel",
     "RelativePath": "api/ToDo/{id}/cancel",
     "HttpMethod": "PATCH",
