@@ -5,9 +5,9 @@ mongodump --db nome_do_banco --collection nome_da_colecao --out /pendrive/pasta;
 
 mongodump --uri="mongodb://usuario:senha@host:porta/nome_do_banco" --out /pendrive/pasta;
 
-// PARÂMETROS DE BACKUP
-
 // ----------------------------------------------------------------------
+
+// PARÂMETROS DE BACKUP
 
 // Define o banco a ser exportado
 --db nome_do_banco
@@ -64,7 +64,6 @@ mongodump --uri="mongodb://usuario:senha@host:porta/nome_do_banco" --out /pendri
 
 // Mostra quantos backups foram feitos
 --oplog;
-
 
 // Número de coleções a serem exportadas simultaneamente
 --numParallelCollections 4;
