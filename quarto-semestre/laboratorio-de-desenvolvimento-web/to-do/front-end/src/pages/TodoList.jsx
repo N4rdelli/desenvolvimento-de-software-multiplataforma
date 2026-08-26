@@ -1,4 +1,26 @@
+import React, {useState, useEffect } from "react";
+import { getToDos } from "../api/ToDo";
+import TodoItem from "../components/TodoItem";
+import { Link } from "react-router-dom";
+
 export default function TodoList() {
+    const [toDos, setToDos] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchTasks  = async () => {
+        try {
+            setLoading(true);
+            const response = await getToDos();
+            setToDos(response.data.Tasks);
+        } catch (error){
+            alert(error);
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {fetchTasks ()}, [])
+
     return(
         <div>
             <div className="flex items-center justify-between mb-4">
@@ -8,7 +30,7 @@ export default function TodoList() {
             {loading && <p>Carregando...</p>}
             {error && <p className="text-red-600">{error}</p>}
             <div className="space-y-3">
-                {todos?.length === 0 && !loading?(
+                {toDos?.length === 0 && !loading?(
                     <p className="text-gray-500">Nenhuma Tarefa encontrada!</p>
                 ):(
                     todos?.map(todo=>(

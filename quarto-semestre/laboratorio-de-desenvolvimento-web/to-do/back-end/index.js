@@ -16,7 +16,7 @@ const app = new express();
 // Comunicação entre front-end e back-end
 app.use(express.json());
 app.use(cors({
-    Credential: true,
+    credentials: true,
     origin: "http://localhost:5173"
 }));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
