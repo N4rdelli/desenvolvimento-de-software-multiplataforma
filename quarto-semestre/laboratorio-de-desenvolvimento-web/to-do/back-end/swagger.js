@@ -9,11 +9,14 @@ const doc = {
     basePath: "/toDo"
 }
 
-// Indica o caminho das rotasque serão utilizadas pelo swagger
-const routesFiles = ["./routes/routes.js"];
+// Indica o caminho das rotas que serão utilizadas pelo swagger
+const endpointsFiles = [
+    "./routes/userRoutes.js",
+    "./routes/taskRoutes.js"
+];
 
 // Indica o arquivo que será gerado automaticamnte pelo swagger
 const outputFile = "./swagger-output.json";
 
 // Utiliza o swagger
-SwaggerAutogen(outputFile, routesFiles, doc);
+SwaggerAutogen(outputFile, endpointsFiles, doc);

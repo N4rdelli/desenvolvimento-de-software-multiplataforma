@@ -1,7 +1,8 @@
 // Importa os módulos instalados
 import express from 'express';
 import cors from 'cors';
-import routes from "./routes/routes.js";
+import taskRoutes from "./routes/taskRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import swaggerUi from "swagger-ui-express";
 import { createRequire } from "module";
 
@@ -20,5 +21,6 @@ app.use(cors({
     origin: "http://localhost:5173"
 }));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/toDo", routes);
+app.use("/ToDo", taskRoutes);
+app.use("/ToDo", userRoutes);
 app.listen(5000);
